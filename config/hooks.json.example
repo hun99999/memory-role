@@ -1,0 +1,30 @@
+{
+  "description": "Token-bounded Basic Memory orientation and pre-compaction checkpoint",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 -B /Users/hooooonje/memory-role/hooks/session_start.py",
+            "timeout": 15,
+            "additionalContextLimit": 1200
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "manual|auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 -B /Users/hooooonje/memory-role/hooks/pre_compact.py",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
