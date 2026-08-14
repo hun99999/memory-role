@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+*.log
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.wal
+*.shm
+local/
+setup-report.local.md

@@ -1,0 +1,12 @@
+{
+  "basicMemory": {
+    "primaryProject": "main",
+    "secondaryProjects": [],
+    "teamProjects": {},
+    "focus": "memory setup and operations",
+    "captureFolder": "codex/checkpoints",
+    "rememberFolder": "codex/remember",
+    "recallTimeframe": "7d",
+    "placementConventions": "Put durable decisions in codex/decisions/ and pointer-first checkpoints in codex/checkpoints/."
+  }
+}
