@@ -123,6 +123,8 @@ Basic Memory project는 `main` 하나만 만들었고 `~/basic-memory`를 defaul
 - backup integration test: no-change, successful push, failed-push local commit preservation 통과
 - private repository visibility `PRIVATE`, default branch `main`, local/remote SHA 일치
 - LaunchAgent loaded, 900초 interval, RunAtLoad execution exit `0`, stderr 없음
+- fresh natural Codex E2E: hook trust 우회 없이 새 ephemeral task를 시작하고 tool call을 금지했을 때 `/Users/hooooonje/basic-memory`, `900초`를 정확히 응답
+- E2E 전후 hook event count `6 -> 7`, 선택 permalink `main/codex/checkpoints/memory-role/memory-role-checkpoint-2026-08-15-044600-kst-automatic-memory-ready`
 - canonical Markdown과 SQLite/cache/log 분리 확인
 - secret/runtime file이 공개 Git staging 대상이 되지 않도록 ignore/검증 규칙 추가
 - GitHub `hun99999/memory-role` remote 생성과 `PUBLIC` visibility 확인
@@ -133,15 +135,16 @@ Basic Memory project는 `main` 하나만 만들었고 `~/basic-memory`를 defaul
 
 ### PENDING
 
-- fresh natural Codex E2E는 최종 public commit과 setup note 갱신 후 마지막 검증으로 실행합니다.
+- 없음
 
 ## 토큰 효율 증거
 
 - SessionStart는 search 1회(`page-size=3`)와 exact read 1회만 사용하고 같은 task에서 재검색하지 않도록 context에 명시합니다.
-- 실제 direct invocation은 관련 checkpoint 1개만 선택했으며 context는 hard limit 3,200자 이내였습니다. Codex 자체 `additionalContextLimit=1200`도 적용됩니다.
+- 실제 E2E가 선택한 checkpoint context는 2,100자였으며 hard limit 3,200자 이내였습니다. Codex 자체 `additionalContextLimit=1200`도 적용됩니다.
 - 관련 note가 없으면 context를 출력하지 않습니다.
 - PreCompact는 전체 transcript/content graph를 주입하지 않고 최대 2MB tail의 짧은 excerpt만 checkpoint 작성에 사용합니다.
 - 15분 Git backup은 Codex token을 사용하지 않는 local shell/launchd 작업입니다.
+- fresh E2E 전체 입력은 18,095 tokens, 출력은 28 tokens였습니다. 전체 입력은 global instructions와 설치된 skill/plugin catalog를 포함하며, Basic Memory hook 자체 주입은 위 2,100자입니다.
 
 ## 알려진 제한
 
@@ -162,4 +165,4 @@ Basic Memory project는 `main` 하나만 만들었고 `~/basic-memory`를 defaul
 
 ## 남은 정확한 한 가지 조치
 
-- 최종 public commit/설정 note를 반영한 fresh natural Codex E2E를 실행하고 이 보고서의 PENDING을 닫습니다.
+- 없음
