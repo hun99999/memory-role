@@ -28,6 +28,7 @@ standalone local MCP만 사용합니다.
 - Codex 자체 Memories의 생성과 사용은 껐지만 기존 데이터는 삭제하지 않았습니다.
 - Basic Memory MCP는 전역에 정확히 한 번 등록했습니다.
 - MCP 도구는 `search_notes`, `read_note`, `write_note`, `edit_note`, `list_directory`, `list_memory_projects`만 허용합니다.
+- Basic Memory의 background `auto_update`는 꺼서 설치 버전이 `versions.env`의 exact pin을 벗어나지 않게 했습니다.
 - 공식 Codex plugin과 SessionStart/PreCompact hook은 설치하지 않았습니다. 자동 orientation과 transcript 기반 checkpoint가 매 세션 문맥을 늘리고 별도 hook 신뢰를 요구하기 때문입니다.
 - cloud sync와 자동 Git backup도 켜지 않았습니다.
 
@@ -121,6 +122,7 @@ uv tool install --force 'basic-memory==X.Y.Z'
 ```
 
 floating `main`, unpinned `uvx`, beta/nightly는 사용하지 않습니다.
+upgrade 후 `~/.basic-memory/config.json`의 `auto_update`는 다시 `false`인지 확인합니다.
 
 ## rollback / uninstall
 

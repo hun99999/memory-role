@@ -20,6 +20,7 @@ fi
 
 python3 - "${expected_version}" <<'PY'
 import json
+import shutil
 import stat
 import sys
 import tomllib
@@ -37,6 +38,10 @@ if not isinstance(server, dict):
     raise SystemExit("FAIL: basic-memory MCP is not configured")
 if server.get("args") != ["mcp"]:
     raise SystemExit("FAIL: basic-memory MCP args differ from ['mcp']")
+resolved_command = Path(server.get("command", "")).resolve()
+path_command = shutil.which("basic-memory")
+if path_command is None or resolved_command != Path(path_command).resolve():
+    raise SystemExit("FAIL: basic-memory MCP command differs from the installed executable")
 expected_tools = {
     "search_notes",
     "read_note",
@@ -56,6 +61,8 @@ if memory_settings.get("generate_memories") is not False or memory_settings.get(
 bm = json.loads(bm_path.read_text())
 if bm.get("default_project") != "main":
     raise SystemExit("FAIL: Basic Memory default project is not main")
+if bm.get("auto_update") is not False:
+    raise SystemExit("FAIL: Basic Memory auto_update must be false for an exact version pin")
 main = bm.get("projects", {}).get("main", {})
 if Path(main.get("path", "")).resolve() != canonical_path.resolve():
     raise SystemExit("FAIL: main project canonical path differs from ~/basic-memory")
@@ -63,6 +70,8 @@ if not (home / ".basic-memory" / "memory.db").is_file():
     raise SystemExit("FAIL: derived SQLite database is missing")
 if stat.S_IMODE(bm_path.stat().st_mode) != 0o600:
     raise SystemExit("FAIL: ~/.basic-memory/config.json permissions are not 0600")
+if stat.S_IMODE(bm_path.parent.stat().st_mode) != 0o700:
+    raise SystemExit("FAIL: ~/.basic-memory directory permissions are not 0700")
 PY
 
 mcp_count="$(codex mcp list 2>/dev/null | awk '/^basic-memory[[:space:]]/ {count++} END {print count+0}')"

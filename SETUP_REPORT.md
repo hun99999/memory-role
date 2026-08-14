@@ -58,6 +58,7 @@ Basic Memory project는 `main` 하나만 만들었고 `~/basic-memory`를 defaul
 
 - `~/.codex/config.toml.backup-20260815T040019+0900`
 - `~/.codex/AGENTS.md.backup-20260815T040019+0900`
+- `~/.basic-memory/config.json.backup-20260815T041159+0900`
 
 기존 파일 전체를 덮어쓰지 않고 Basic Memory 관련 항목과 짧은 운영 규칙만 추가했습니다.
 
@@ -70,6 +71,7 @@ Basic Memory project는 `main` 하나만 만들었고 `~/basic-memory`를 defaul
 - 중복 등록: 없음, 정확히 1개
 - Codex native Memories: feature/use/generation 모두 `false`; 기존 memory data는 보존
 - `~/.codex/basic-memory.json`: 생성하지 않음. 공식 plugin을 설치하지 않았으므로 dead user-level plugin config를 만들지 않았습니다.
+- Basic Memory `auto_update`: `false`; exact package pin은 수동 upgrade 때만 변경
 
 ## Plugin / Hook
 
@@ -102,6 +104,7 @@ Basic Memory project는 `main` 하나만 만들었고 `~/basic-memory`를 defaul
 - fresh ephemeral Codex CLI task가 Basic Memory MCP의 두 도구만 사용해 `BASIC_MEMORY_CODEX_E2E_PASS` 반환
 - `basic-memory doctor`의 API write, filesystem sync, search, clean status 모두 통과
 - Codex config strict parse와 Basic Memory MCP 단일 등록 확인
+- Basic Memory background auto-update 비활성화 확인
 - native Memories 비활성화 확인
 - plugin/hook 미설치 확인
 - canonical Markdown과 SQLite/cache/log 분리 확인
